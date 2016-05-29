@@ -10,6 +10,8 @@ std::string URL, USERNAME, CHANNEL;
 //Connection object for managing connection
 Connection con( 1000);
 
+MessageHandler mhandler;
+
 //main function requires exact number of strings passed to it in order to work
 int main( int argc, char *argv[]){
   if( argc == 4){
@@ -28,17 +30,15 @@ int main( int argc, char *argv[]){
     //send irc protocol to join chat room at GoldsmithsC++
     con.sendTo( USERNAME, "NICK revengeBOT\r\nUser revengeBOT * * :rvngbt\r\nJOIN :#GoldsmithsC++\r\n" );
 
-    for ( int x = 0; x < 10; x++){
+    while( mhandler.isRunning()){
+
       //irc protocol requires a short pause before posting connection data
-      sf::sleep(sf::milliseconds( 5000));
+      sf::sleep(sf::milliseconds( 1000));
 
       if( con.dataAvailable( USERNAME)){
 
-        std::cout << con.receiveFrom( USERNAME)<<"!";
+        std::cout << con.receiveFrom( USERNAME)<<".-";
       }
-      //send irc protocol to join chat room at GoldsmithsC++
-      con.sendTo( USERNAME, "\r\n" );
-
     }
 
     return 0;
