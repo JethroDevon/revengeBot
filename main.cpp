@@ -16,25 +16,9 @@ MessageHandler mhandler;
 int main( int argc, char *argv[]){
   if( argc == 4){
 
-    //converts char array to port number, other global variables are initialised
-    PORT = std::atoi( argv[1]);
-    URL = argv[2];
-    USERNAME = argv[3];
-
-    //initialise socket with data from command line
-    con.addSocket( USERNAME, URL, PORT);
-
-    //irc protocol requires a short pause before posting connection data
-    sf::sleep( sf::milliseconds( 1000));
-
-    //send irc protocol to join chat room at GoldsmithsC++
-    con.sendTo( USERNAME, "NICK revengeBOT\r\nUser revengeBOT * * :rvngbt\r\nJOIN :#GoldsmithsC++\r\n" );
-
     while( mhandler.isRunning()){
 
-      //irc protocol requires a short pause before posting connection data
-      sf::sleep(sf::milliseconds( 1000));
-
+  
       if( con.dataAvailable( USERNAME)){
 
         std::cout << con.receiveFrom( USERNAME)<<".-";
